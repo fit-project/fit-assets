@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "fit-assets"
+version = "0.1.0"
+description = "Assets (icons, images, resources) for the FIT project"
+authors = ["FIT Project"]
+packages = [
+    { include = "fit_assets" }
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
