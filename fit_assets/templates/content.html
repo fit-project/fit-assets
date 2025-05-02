@@ -109,14 +109,18 @@
 <div class="pagebreak"></div>
 <h4 id="t5">{{ '5.' if include_whois else '4.' }} {{ t5 }}</h4>
 <p>{{ t5descr }}</p>
-<table id="file_info">
-    <tr><th>{{ name }}</th><th>{{ descr }}</th></tr>
-    {% for row in file_rows %}
+<table id="case_info">
+    <tr>
+        <th>{{ name }}</th>
+        <th>{{ descr }}</th>
+    </tr>
+    {% for row in case_rows %}
         {% if row.value %}
             <tr><td>{{ row.value }}</td><td>{{ row.desc }}</td></tr>
         {% endif %}
     {% endfor %}
 </table>
+
 
 <div class="pagebreak"></div>
 <h4 id="t6">{{ '6.' if include_whois else '5.' }} {{ t6 }}</h4>
