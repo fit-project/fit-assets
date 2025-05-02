@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fit-assets"
-version = "0.1.7"
+version = "0.1.8"
 description = "Assets (icons, images, resources) for the FIT project"
 authors = ["FIT Project"]
 packages = [

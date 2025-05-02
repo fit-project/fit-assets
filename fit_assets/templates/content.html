@@ -97,12 +97,12 @@
 <h4 id="t2">2. {{ t2 }}</h4>
 <table id="case_info">
     <tr>
-        <th>{{ name }}</th>
-        <th>{{ descr }}</th>
+        <th>{{ case }}</th>
+        <th>{{ casedata }}</th>
     </tr>
     {% for row in case_rows %}
         {% if row.value %}
-            <tr><td>{{ row.desc }}</td><td>{{ row.value }}</td></tr>
+            <tr><td>{{ row.value }}</td><td>{{ row.desc }}</td></tr>
         {% endif %}
     {% endfor %}
 </table>
