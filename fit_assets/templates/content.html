@@ -69,17 +69,24 @@
 <div id="toc_container">
     <p class="toc_title">{{ index }}</p>
     <ol class="toc_list">
-        <li><a href="#t1">{{ t1 }}</a></li>
-        <li><a href="#t2">{{ t2 }}</a></li>
-        {% if include_whois %}<li><a href="#t3">{{ t3 }}</a></li>{% endif %}
-        <li><a href="#t4">{{ t4 }}</a></li>
-        <li><a href="#t5">{{ t5 }}</a></li>
-        <li><a href="#t6">{{ t6 }}</a></li>
-        {% if include_screenshots %}<li><a href="#t7">{{ t7 }}</a></li>{% endif %}
-        {% if include_video %}<li><a href="#t8">{{ t8 }}</a></li>{% endif %}
-        {% if include_video %}<li><a href="#t9">{{ t9 }}</a></li>{% endif %}
+        <li class="bodymatter"><a href="#t1" style="text-decoration: none;">{{ t1 }}</a></li>
+        <li class="bodymatter"><a href="#t2" style="text-decoration: none;">{{ t2 }}</a></li>
+        {% if include_whois %}
+        <li class="bodymatter"><a href="#t3" style="text-decoration: none;">{{ t3 }}</a></li>
+        {% endif %}
+        <li class="bodymatter"><a href="#t4" style="text-decoration: none;">{{ t4 }}</a></li>
+        <li class="bodymatter"><a href="#t5" style="text-decoration: none;">{{ t5 }}</a></li>
+        <li class="bodymatter"><a href="#t6" style="text-decoration: none;">{{ t6 }}</a></li>
+        {% if include_screenshots %}
+        <li class="bodymatter"><a href="#t7" style="text-decoration: none;">{{ t7 }}</a></li>
+        {% endif %}
+        {% if include_video %}
+        <li class="bodymatter"><a href="#t8" style="text-decoration: none;">{{ t8 }}</a></li>
+        <li class="bodymatter"><a href="#t9" style="text-decoration: none;">{{ t9 }}</a></li>
+        {% endif %}
     </ol>
 </div>
+
 
 <div class="pagebreak"></div>
 
