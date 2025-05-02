@@ -33,15 +33,36 @@
             font-family: "Times New Roman", Times, serif;
             font-size: 12pt;
         }
-        #case_info td, #case_info th, #file_info td, #file_info th {
-            border: 1pt solid #ddd; padding: 6pt;
-        }
-        #case_info th, #file_info th {
-            background-color: orange; color: white; text-align: center;
+
+        #case_info {
+            width: 100%;
+            table-layout: auto;
         }
 
-        #case_info td, #case_info th {border: 1pt solid #ddd;padding: 6pt;vertical-align: top;word-wrap: break-word;white-space: normal;width: 50%;}
-        #case_info {width: 100%;table-layout: fixed;}
+        #case_info td:first-child,
+        #case_info th:first-child {
+            width: 35%;
+        }
+
+        #case_info td:last-child,
+        #case_info th:last-child {
+            width: 65%;
+        }
+
+        #case_info td, #case_info th,
+        #file_info td, #file_info th {
+            border: 1pt solid #ddd;
+            padding: 6pt;
+            vertical-align: top;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        #case_info th, #file_info th {
+            background-color: orange;
+            color: white;
+            text-align: center;
+        }
 
         #toc_container { font-size: 15pt; }
         #toc_container p { font-size: 19pt; }
@@ -89,7 +110,7 @@
     </tr>
     {% for row in case_rows %}
         {% if row.value %}
-            <tr><td>{{ row.value }}</td><td>{{ row.desc }}</td></tr>
+            <tr><td>{{ row.desc }}</td><td>{{ row.value }}</td></tr>
         {% endif %}
     {% endfor %}
 </table>
