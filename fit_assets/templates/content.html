@@ -130,7 +130,11 @@
                 <p>{{ section.description }}</p>
             {% endif %}
             <table class="file-table" id="{{ section.type }}">
-                <tr><th>{{ "Name" }}</th><th>{{ "Description" }}</th></tr>
+                <tr>
+                    {% for column in section.columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
                 {% for row in section.rows %}
                     <tr>
                         <td>{{ row.value }}</td>
