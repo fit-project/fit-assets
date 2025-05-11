@@ -7,7 +7,7 @@
         @media print {.pagebreak {page-break-before: always;}}
         h1 { font-size: 45pt; font-family: "Times New Roman", Times, serif; }
         h2 { font-size: 30pt; font-family: "Times New Roman", Times, serif; }
-        h3 { font-size: 16pt; font-family: "Times New Roman", Times, serif; }
+        h3 { font-size: 16pt; font-family: "Times New Roman", Times, serif; color: #ff6600;}
         h4 { font-size: 19pt; font-family: "Times New Roman", Times, serif; color: #ff6600; }
         p { font-size: 12pt; font-family: "Times New Roman", Times, serif; text-align: justify; }
 
@@ -58,11 +58,6 @@
 
         #hash p { -pdf-word-wrap: CJK; }
 
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
         #toc_container {
             font-size: 15pt;
         }
@@ -82,6 +77,8 @@
         #toc_container a {
             font-size: 15pt;
             font-family: "Times New Roman", Times, serif;
+            color: black;
+            text-decoration: none;
         }
 
 
@@ -90,30 +87,6 @@
 
 <body>
 
-<!-- Table of Contents -->
-<div id="toc_container">
-    <p class="toc_title">{{ index }}</p>
-    <ol class="toc_list">
-        <li class="bodymatter"><a href="#t1">{{ t1 }}</a></li>
-        <li class="bodymatter"><a href="#t2">{{ t2 }}</a></li>
-        {% if include_whois %}
-        <li class="bodymatter"><a href="#t3">{{ t3 }}</a></li>
-        {% endif %}
-        <li class="bodymatter"><a href="#t4">{{ t4 }}</a></li>
-        <li class="bodymatter"><a href="#t5">{{ t5 }}</a></li>
-        <li class="bodymatter"><a href="#t6">{{ t6 }}</a></li>
-        {% if include_screenshots %}
-        <li class="bodymatter"><a href="#t7">{{ t7 }}</a></li>
-        {% endif %}
-        {% if include_video %}
-        <li class="bodymatter"><a href="#t8">{{ t8 }}</a></li>
-        <li class="bodymatter"><a href="#t9">{{ t9 }}</a></li>
-        {% endif %}
-    </ol>
-</div>
-
-
-<div class="pagebreak"></div>
 
 <!-- Header and Footer -->
 <div id="header_content" style="text-align: left; font-family: 'Times New Roman'; font-size: 11pt;">
@@ -125,77 +98,86 @@
         {{ page }}<pdf:pagenumber></pdf:pagenumber> {{ of }}<pdf:pagecount></pdf:pagecount>
 </div>
 
-<!-- Sezione 1 -->
-<h4 id="t1">1. {{ t1 }}</h4>
-<p>{{ description }}</p>
+<!-- Table of Contents -->
+<div id="toc_container">
+    <p class="toc_title">{{ index }}</p>
+    <ol class="toc_list">
+        {% for section in sections %}
+            <li class="bodymatter"><a href="#t{{ loop.index }}">{{ section.title }}</a></li>
+        {% endfor %}
+    </ol>
+</div>
+
 
 <div class="pagebreak"></div>
 
-<!-- Sezione 2 -->
-<h4 id="t2">2. {{ t2 }}</h4>
-<table id="case_info">
-    <tr>
-        <th>{{ case }}</th>
-        <th>{{ casedata }}</th>
-    </tr>
-    {% for row in case_rows %}
-        {% if row.value %}
-            <tr><td>{{ row.value }}</td><td>{{ row.desc }}</td></tr>
+{% for section in sections %}
+    <div class="section-content">
+        <h4 class="section-title">{{ loop.index }}. {{ section.title }}</h4>
+
+        {% if section.type == "fit_description" %}
+            <p>{{ section.content }}</p>
+        
+        {% elif section.type == "digital_forensics" %}
+            <p>{{ section.description }}</p>
+            <h3>{{ loop.index }}.1 {{ section.subtitles.cc }}</h3>
+            <p>{{ section.contents.cc }}</p>
+            <h3>{{ loop.index }}.2 {{ section.subtitles.h }}</h3>
+            <p>{{ section.contents.h }}</p>
+
+        {% elif section.type in ["case_info", "file_info"] %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <table class="file-table" id="{{ section.type }}">
+                <tr><th>{{ "Name" }}</th><th>{{ "Description" }}</th></tr>
+                {% for row in section.rows %}
+                    <tr>
+                        <td>{{ row.value }}</td>
+                        <td>{{ row.desc }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if section.note %}
+                <br>
+                <p><b>{{ note }}</b></p>
+                <p>{{ section.note }}</p>
+            {% endif %}
+        
+        {% elif section.type == "zip_content" %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <pre>{{ section.content }}</pre>
+
+        {% elif section.type == "whois" %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <pre>{{ section.content }}</pre>
+
+        {% elif section.type == "hash" %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <div>{{ section.content }}</div>
+
+        {% elif section.type == "screenshot" %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <div>{{ section.content }}</div>
+
+        {% elif section.type == "video" %}
+            {% if section.description %}
+                <p>{{ section.description }}</p>
+            {% endif %}
+            <div>{{ section.content }}</div>
         {% endif %}
-    {% endfor %}
-</table>
-<p><b>{{ case8 }}</b></p>
-<p>{{ data8 }}</p>
-
-{% if include_whois %}
-<div class="pagebreak"></div>
-<h4 id="t3">3. {{ t3 }}</h4>
-<p>{{ t3descr }}</p>
-<pre class="data_from_file">{{ whoisfile }}</pre>
-{% endif %}
-
-<div class="pagebreak"></div>
-<h4 id="t4">{{ '4.' if include_whois else '3.' }} {{ t4 }}</h4>
-<p>{{ t4descr }}</p>
-<h3 id="titlecc">{{ titlecc }}</h3>
-<p>{{ ccdescr }}</p>
-<h3 id="titleh">{{ titleh }}</h3>
-<p>{{ hdescr }}</p>
-
-<div class="pagebreak"></div>
-<h4 id="t5">{{ '5.' if include_whois else '4.' }} {{ t5 }}</h4>
-<p>{{ t5descr }}</p>
-<table id="file_info">
-    <tr><th>{{ name }}</th><th>{{ descr }}</th></tr>
-    {% for row in file_rows %}
-        {% if row.value %}
-            <tr><td>{{ row.value }}</td><td>{{ row.desc }}</td></tr>
-        {% endif %}
-    {% endfor %}
-</table>
-
-<div class="pagebreak"></div>
-<h4 id="t6">{{ '6.' if include_whois else '5.' }} {{ t6 }}</h4>
-<p>{{ t6descr }}</p>
-<div id="hash">{{ file }}</div>
-
-{% if include_screenshots %}
-<div class="pagebreak"></div>
-<h4 id="t7">{{ '7.' if include_whois else '6.' }} {{ t7 }}</h4>
-<p>{{ t7descr }}</p>
-<div id="screenshot">{{ screenshot }}</div>
-{% endif %}
-
-{% if include_video %}
-<div class="pagebreak"></div>
-<h4 id="t8">{{ '8.' if include_whois else '7.' }} {{ t8 }}</h4>
-<p>{{ t8descr }}</p>
-<p>{{ video_hyperlink }}</p>
-
-<div class="pagebreak"></div>
-<h4 id="t9">{{ '9.' if include_whois else '8.' }} {{ t9 }}</h4>
-<p>{{ t9descr }}</p>
-{% endif %}
-
+    </div>
+    {% if not loop.last %}
+        <div class="pagebreak"></div>
+    {% endif %}
+{% endfor %}
 </body>
 </html>
