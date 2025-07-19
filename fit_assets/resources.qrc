@@ -63,5 +63,6 @@
   </qresource>
   <qresource prefix="/images">
     <file>images/logo-42x42.png</file>
+    <file>images/spinner.gif</file>
   </qresource>
 </RCC>
