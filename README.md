@@ -1,6 +1,6 @@
 # fit-assets
 
-Shared assets for the **FIT** (Freezing Internet Tool) ecosystem: icons, fonts, QSS themes, images, and Qt resource files used across external modules (`fit-configuration`, `fit-cases`, `fit-instagram`, etc.).
+Shared assets for the **FIT Project**: icons, fonts, QSS themes, images, and Qt resource files used across external modules (`fit-configuration`, `fit-cases`, `fit-instagram`, etc.).
 
 ---
 
