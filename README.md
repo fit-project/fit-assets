@@ -50,9 +50,3 @@ from PySide6.QtGui import QIcon
 btn.setIcon(QIcon(':/icons/fit.svg'))
 ```
 ---
-
-### **Option 2 – Generate a binary bundle (`.rcc`)**
-Create a portable binary bundle (useful for distribution):
-```bash
-pyside6-rcc fit_assets/qrc/assets.qrc -o fit_assets/assets.rcc --binary
-```
