@@ -177,6 +177,11 @@
                 <p>{{ section.description }}</p>
             {% endif %}
             <div>{{ section.content }}</div>
+        {% elif section.type == "verification_report" %}
+            {% if section.verification_result %}
+                <p>{{ section.verification_result }}</p>
+            {% endif %}
+            <pre class="data_from_file">{{ section.content }}</pre>
         {% endif %}
     </div>
     {% if not loop.last %}
