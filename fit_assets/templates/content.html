@@ -181,7 +181,7 @@
             {% if section.verification_result %}
                 <p>{{ section.verification_result }}</p>
             {% endif %}
-            <div>{{ section.content }}</div>
+            <pre class="data_from_file">{{ section.content }}</pre>s
         {% endif %}
     </div>
     {% if not loop.last %}
