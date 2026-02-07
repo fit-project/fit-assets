@@ -124,7 +124,10 @@
             <p>{{ section.contents.cc }}</p>
             <h3>{{ loop.index }}.2 {{ section.subtitles.h }}</h3>
             <p>{{ section.contents.h }}</p>
-
+        
+        {% elif section.type == "wacz_description" %}
+            <p>{{ section.content }}</p>
+            
         {% elif section.type in ["case_info", "file_info"] %}
             {% if section.description %}
                 <p>{{ section.description }}</p>
