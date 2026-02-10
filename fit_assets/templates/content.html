@@ -2,7 +2,7 @@
 <html lang="en" xmlns:pdf="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <title>{{ application_short_name }}</title>
     <style type="text/css">
         @media print {.pagebreak {page-break-before: always;}}
         h1 { font-size: 45pt; font-family: "Times New Roman", Times, serif; }
@@ -90,7 +90,7 @@
 
 <!-- Header and Footer -->
 <div id="header_content" style="text-align: left; font-family: 'Times New Roman'; font-size: 11pt;">
-    {{ title }} - {{ t1 }}
+    {{ application_short_name }} - {{ document_title }}
     <hr color="orange">
 </div>
 <div id="footer_content" style="justify-content: space-between; display: flex; font-family: 'Times New Roman';text-align: center; font-size: 11pt;">
@@ -120,15 +120,15 @@
         
         {% elif section.type == "digital_forensics" %}
             <p>{{ section.description }}</p>
-            <h3>{{ loop.index }}.1 {{ section.subtitles.cc }}</h3>
-            <p>{{ section.contents.cc }}</p>
-            <h3>{{ loop.index }}.2 {{ section.subtitles.h }}</h3>
-            <p>{{ section.contents.h }}</p>
+            <h3>{{ loop.index }}.1 {{ section.subtitles.chain_of_custody }}</h3>
+            <p>{{ section.contents.chain_of_custody }}</p>
+            <h3>{{ loop.index }}.2 {{ section.subtitles.hashes }}</h3>
+            <p>{{ section.contents.hashes }}</p>
         
         {% elif section.type == "wacz_description" %}
             <p>{{ section.content }}</p>
             
-        {% elif section.type in ["case_info", "file_info"] %}
+        {% elif section.type in ["case_info", "system_artifacts", acquired_content] %}
             {% if section.description %}
                 <p>{{ section.description }}</p>
             {% endif %}
@@ -150,12 +150,6 @@
                 <p><b>{{ note }}</b></p>
                 <p>{{ section.note }}</p>
             {% endif %}
-        
-        {% elif section.type == "zip_content" %}
-            {% if section.description %}
-                <p>{{ section.description }}</p>
-            {% endif %}
-            <pre>{{ section.content }}</pre>
 
         {% elif section.type == "whois" %}
             {% if section.description %}
@@ -163,7 +157,7 @@
             {% endif %}
             <pre>{{ section.content }}</pre>
 
-        {% elif section.type == "hash" %}
+        {% elif section.type == "integrity_verification" %}
             {% if section.description %}
                 <p>{{ section.description }}</p>
             {% endif %}
