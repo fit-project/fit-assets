@@ -29,7 +29,7 @@
         .data_from_file { font-size: 10pt; font-family: "Times New Roman", Times, serif; }
         .bodymatter a::after { content: "p. " target-counter(attr(href), page); }
 
-        #case_info, #file_info {
+        #case_info, #system_artifacts, #acquired_content {
             font-family: "Times New Roman", Times, serif;
             font-size: 12pt;
         }
@@ -39,8 +39,9 @@
             table-layout: fixed;
         }
 
-        #case_info td, #case_info th,
-        #file_info td, #file_info th {
+        #case_info td, #case_info th, 
+        #system_artifacts td, #system_artifacts th, 
+        #acquired_content td, #acquired_content th {
             border: 1pt solid #ddd;
             padding: 6pt;
             vertical-align: top;
@@ -49,7 +50,7 @@
             width: 50%;
         }
 
-        #case_info th, #file_info th {
+        #case_info th, #system_artifacts th, #acquired_content th  {
             background-color: orange;
             color: white;
             text-align: center;
