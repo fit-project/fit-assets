@@ -129,7 +129,7 @@
         {% elif section.type == "wacz_description" %}
             <p>{{ section.content }}</p>
             
-        {% elif section.type in ["case_info", "system_artifacts", acquired_content] %}
+        {% elif section.type in ["case_info", "system_artifacts", "acquired_content"] %}
             {% if section.description %}
                 <p>{{ section.description }}</p>
             {% endif %}
