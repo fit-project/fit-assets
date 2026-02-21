@@ -12,6 +12,15 @@ python = ">=3.11,<3.14"
 PySide6 = "6.9.0"
 pytest = "^9.0.2"
 
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+markers = [
+    "unit: fast isolated tests",
+    "contract: cross-module contract tests for public interfaces and integrations",
+    "integration: integration tests with real external resources and dependencies",
+    "e2e: end-to-end UI workflow tests",
+]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
