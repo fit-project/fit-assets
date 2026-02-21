@@ -3,9 +3,12 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import pytest
 from PySide6.QtCore import QFile
 
 import fit_assets.resources  # noqa: F401  # Registers Qt resources
+
+pytestmark = pytest.mark.contract
 
 
 def _exposed_resource_paths() -> list[str]:

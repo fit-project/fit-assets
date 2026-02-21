@@ -3,8 +3,11 @@ from __future__ import annotations
 import ssl
 from pathlib import Path
 
+import pytest
+
 
 CERT_PATH = Path(__file__).resolve().parents[2] / "fit_assets" / "mitmproxy" / "mitmproxy-ca-cert.pem"
+pytestmark = pytest.mark.contract
 
 
 def _common_name(decoded_cert: dict) -> str | None:

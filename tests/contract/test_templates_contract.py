@@ -7,6 +7,7 @@ import pytest
 
 
 TEMPLATES_DIR = Path(__file__).resolve().parents[2] / "fit_assets" / "templates"
+pytestmark = pytest.mark.contract
 
 EXPECTED_TEMPLATES = {
     "content.html": {
