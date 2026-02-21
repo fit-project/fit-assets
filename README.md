@@ -35,6 +35,27 @@ poetry install
 
 ---
 
+## Local Testing
+
+### What each tool does
+- `pytest`: runs contract tests
+
+### 1) Base setup
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+pip install . pytest
+```
+
+### 2) Test suite
+```bash
+# contract tests
+pytest -m contract -q tests
+```
+
+---
+
 ## 🔧 Compile Qt Resources with **PySide**
 
 Compile the `.qrc` file into a Python module:
