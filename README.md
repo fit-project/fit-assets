@@ -11,9 +11,9 @@ Shared assets for the **FIT Project**: icons, fonts, QSS themes, images, and Qt 
 ---
 
 ## Requirements
-- **Python** 3.11–3.12  
+- **Python** >=3.11,<3.14
 - **PySide6** ≥ 6.9.0 (for `pyside6-rcc`)  
-- **Poetry** (optional but recommended)
+- **Poetry** (recommended for development)
 
 ---
 
