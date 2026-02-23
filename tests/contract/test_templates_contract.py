@@ -5,16 +5,6 @@ from pathlib import Path
 
 import pytest
 
-#
-# Contract tests for HTML templates used in report generation.
-# These tests ensure that the templates contain the expected variables and control statements,
-# and that they are well-formed HTML documents.
-# The expected variables and statements are defined in the EXPECTED_TEMPLATES dictionary.
-# Each template is checked for existence, non-emptiness, and the presence of basic HTML structure.
-# The variable and statement tokens are extracted using regular expressions and compared against the expected sets.
-# Any discrepancies will cause the test to fail, providing details about the missing or unexpected tokens.
-#
-
 TEMPLATES_DIR = Path(__file__).resolve().parents[2] / "fit_assets" / "templates"
 EXPECTED_TEMPLATES = {
     "content.html": {
