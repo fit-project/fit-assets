@@ -5,10 +5,7 @@ from pathlib import Path
 
 import pytest
 
-
 TEMPLATES_DIR = Path(__file__).resolve().parents[2] / "fit_assets" / "templates"
-pytestmark = pytest.mark.contract
-
 EXPECTED_TEMPLATES = {
     "content.html": {
         "vars": {
@@ -69,10 +66,14 @@ EXPECTED_TEMPLATES = {
 
 
 def _extract_template_tokens(content: str, pattern: str) -> set[str]:
-    tokens = {re.sub(r"\s+", " ", match.strip()) for match in re.findall(pattern, content, re.S)}
+    tokens = {
+        re.sub(r"\s+", " ", match.strip())
+        for match in re.findall(pattern, content, re.S)
+    }
     return tokens
 
 
+@pytest.mark.contract
 @pytest.mark.parametrize("template_name, expected", EXPECTED_TEMPLATES.items())
 def test_templates_contract(template_name: str, expected: dict[str, set[str]]) -> None:
     template_path = TEMPLATES_DIR / template_name

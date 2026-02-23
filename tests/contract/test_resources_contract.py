@@ -8,8 +8,6 @@ from PySide6.QtCore import QFile
 
 import fit_assets.resources  # noqa: F401  # Registers Qt resources
 
-pytestmark = pytest.mark.contract
-
 
 def _exposed_resource_paths() -> list[str]:
     qrc_path = Path(__file__).resolve().parents[2] / "fit_assets" / "resources.qrc"
@@ -28,6 +26,7 @@ def _exposed_resource_paths() -> list[str]:
     return exposed_paths
 
 
+@pytest.mark.contract
 def test_all_exposed_resources_are_readable() -> None:
     exposed_paths = _exposed_resource_paths()
     assert exposed_paths, "No exposed resources found in fit_assets/resources.qrc"
@@ -38,7 +37,6 @@ def test_all_exposed_resources_are_readable() -> None:
         if not qfile.exists() or qfile.size() <= 0:
             missing_or_empty.append(path)
 
-    assert not missing_or_empty, (
-        "Some exposed resources are missing or empty: "
-        + ", ".join(missing_or_empty)
-    )
+    assert (
+        not missing_or_empty
+    ), "Some exposed resources are missing or empty: " + ", ".join(missing_or_empty)

@@ -5,9 +5,12 @@ from pathlib import Path
 
 import pytest
 
-
-CERT_PATH = Path(__file__).resolve().parents[2] / "fit_assets" / "mitmproxy" / "mitmproxy-ca-cert.pem"
-pytestmark = pytest.mark.contract
+CERT_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "fit_assets"
+    / "mitmproxy"
+    / "mitmproxy-ca-cert.pem"
+)
 
 
 def _common_name(decoded_cert: dict) -> str | None:
@@ -18,6 +21,7 @@ def _common_name(decoded_cert: dict) -> str | None:
     return None
 
 
+@pytest.mark.contract
 def test_mitmproxy_ca_certificate_contract() -> None:
     assert CERT_PATH.exists(), f"Certificate not found: {CERT_PATH}"
     assert CERT_PATH.stat().st_size > 0, f"Certificate is empty: {CERT_PATH}"
